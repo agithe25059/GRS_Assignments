@@ -121,8 +121,4 @@ python3 MT25059_Part_D_Plotter.py
 * Refining `MT25059_Part_B_worker.h` loop durations for measurable benchmarks.
 
 
-* **Verification:** All logic was verified against Linux man pages and experimental data; code was executed and validated in a local environment.
-
----
-
-**Would you like me to help you draft the submission email for your professor?**
+* **Verification:** All logic was verified against Linux man pages and experimental data.
