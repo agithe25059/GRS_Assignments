@@ -19,8 +19,8 @@ monitor_process() {
         target_pids="${children}${main_pid}"
         
         stats=$(ps -p "${target_pids%,}" -o %cpu,rss --no-headers 2>/dev/null | awk '{c+=$1; m+=$2} END {print c, m}')
-        c=$(echo $stats | awk '{print $1}'; [ -z "$stats" ] && echo 0)
-        m=$(echo $stats | awk '{print $2}'; [ -z "$stats" ] && echo 0)
+        c=$(echo $stats |awk '{print $1}';[ -z "$stats" ]&& echo 0)
+        m=$(echo $stats | awk '{print $2}';[ -z "$stats" ]&& echo 0)
         
         if(( $(echo "$m > $mem_max" | bc -l) )); then 
             mem_max=$m; 

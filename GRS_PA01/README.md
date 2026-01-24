@@ -1,10 +1,10 @@
 # Process vs. Thread Performance Analysis (Assignment 1)
 
-**Name:** Prashant
+**Name:** Agithe Yeshwanth
 
-**Roll No:** [Insert Your Roll Number]
+**Roll No:** MT25059
 
-**Course:** [Insert Course Name]
+**Course:** GRS
 
 ---
 

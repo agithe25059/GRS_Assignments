@@ -9,27 +9,20 @@
 #include <fcntl.h>
 
 #define ROLL_LAST_DIGIT 9
-#define ITERATIONS (ROLL_LAST_DIGIT * 1000)
+#define ITERATIONS (ROLL_LAST_DIGIT* 1000)
 
-static void cpu_worker() {
+static void cpu_worker(){
     volatile double result = 0.0;
+    long limit = (long)ITERATIONS* 10000L; 
     
-    // 2. We use a very large limit to ensure it runs for 5-8 seconds
-    long limit = (long)ITERATIONS * 10000L; 
-    
-    for (long i = 0; i < limit; i++) {
-        // 3. Stick to sqrt and tan as requested
-        result += sqrt(i) + tan(i);
-    }
-    
-    // 4. Remove any printf from here to keep your terminal clean
-    (void)result; 
+    for (long i =0;i<limit;i++)
+        result =result+ sqrt(i)+tan(i);
 }
 
 static void mem_worker() {
     size_t s= 1024 *1024*50;
     
-    for(int i=0;i<ITERATIONS/5;i++) {
+    for(int i=ITERATIONS/5-1;i>=0;i--) {
         int *array=(int*)calloc(s,sizeof(int));
         if(array){
             memset(array,1,s*sizeof(int));
@@ -46,11 +39,12 @@ static void io_worker() {
 
     if (fd!=-1){
         const char *data="IO_DATA_BLOCK"; 
-        size_t len = strlen(data);
-
-        for (int i=0;i<ITERATIONS;i++) {
+        size_t len =strlen(data);
+        int i=0;
+        while(i<ITERATIONS){
             ssize_t ret =write(fd,data,len);
-            (void)ret; 
+            i++;
+            (void)ret;
         }
         fsync(fd);
         close(fd);
@@ -62,9 +56,9 @@ static void io_worker() {
 static void run_worker(const char *type){
     if(strcmp(type,"cpu")==0) 
         cpu_worker();
-    else if (strcmp(type, "mem") == 0) 
+    else if (strcmp(type, "mem") ==0) 
         mem_worker();
-    else if (strcmp(type,"io") == 0) 
+    else if (strcmp(type,"io")== 0) 
         io_worker();
     else 
         printf("Intensive should be cpu|mem|io.");
