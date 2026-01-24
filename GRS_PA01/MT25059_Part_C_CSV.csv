@@ -1,7 +1,7 @@
 Program+Function,CPU_Avg_%,Mem_Max_KB,kB_Wrtn_Total,Duration_Sec
-program_a+cpu,95.70,2432,0,2.869452557
-program_a+mem,1.91,2688,0,4.384296248
-program_a+io,2.30,2944,116,1.191907263
-program_b+cpu,98.80,2176,0,2.767205778
-program_b+mem,2.11,2048,0,4.314462566
-program_b+io,3.50,1920,116,1.706447580
+program_a+cpu,97.56,2432,0,3.471493246
+program_a+mem,2.97,2688,0,4.846739096
+program_a+io,3.41,2944,116,3.710928914
+program_b+cpu,89.80,2048,0,4.128191236
+program_b+mem,3.23,2048,0,4.581281044
+program_b+io,5.10,1920,116,2.455267333

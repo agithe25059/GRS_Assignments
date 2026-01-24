@@ -18,12 +18,12 @@ def plot_scaling():
         print("Error: Column 'Program' not found in CSV. Found:",df.columns)
         return
 
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(10,6))
     proc_df = df[df['Program'] == 'program_a']
     if not proc_df.empty:
         for worker in proc_df['Worker'].unique():
-            subset = proc_df[proc_df['Worker'] == worker]
-            subset = subset.sort_values(by='Count')
+            subset= proc_df[proc_df['Worker']== worker]
+            subset =subset.sort_values(by='Count')
             plt.plot(subset['Count'], subset['Duration_Sec'], marker='o', label=f'{worker.upper()}')
         plt.title('Program A: Multi-Process Scaling (Linear Growth)')
         plt.xlabel('No.of Processes')
