@@ -1,9 +1,3 @@
-/*
- * Roll No: MT25059
- * File: MT25059_common.h
- * Description: Common definitions for data structures and socket helpers.
- */
-
 #ifndef MT25059_COMMON_H
 #define MT25059_COMMON_H
 
@@ -27,8 +21,6 @@ typedef struct {
     int total_size;
 } ComplexMessage;
 
-/* Helper to allocate the 8 fields */
-/* __attribute__((unused)) suppresses warnings if this function isn't called */
 static void __attribute__((unused)) allocate_complex_message(ComplexMessage *msg, int total_size) {
     msg->total_size = total_size;
     int chunk_size = total_size / 8;
@@ -46,28 +38,26 @@ static void __attribute__((unused)) allocate_complex_message(ComplexMessage *msg
     }
 }
 
-/* Helper to free the 8 fields */
 static void __attribute__((unused)) free_complex_message(ComplexMessage *msg) {
     for (int i = 0; i < 8; i++) {
         free(msg->fields[i]);
     }
 }
 
-/* Helper to read exactly n bytes */
 static ssize_t __attribute__((unused)) read_n(int fd, void *ptr, size_t n) {
     size_t nleft = n;
-    ssize_t nread;
+    ssize_t nr;
     char *p = (char *)ptr;
 
     while (nleft > 0) {
-        if ((nread = read(fd, p, nleft)) < 0) {
-            if (errno == EINTR) nread = 0;
+        if ((nr = read(fd, p, nleft)) < 0) {
+            if (errno == EINTR) nr = 0;
             else return -1;
-        } else if (nread == 0) {
-            break; // EOF
+        } else if (nr== 0) {
+            break;
         }
-        nleft -= nread;
-        p += nread;
+        nleft =nleft-nr;
+        p=p+nr;
     }
     return (n - nleft);
 }
